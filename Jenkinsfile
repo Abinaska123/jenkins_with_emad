@@ -50,11 +50,11 @@ pipeline {
                     //docker.withRegistry("${REPOSITORY_URI}", "${AWS_DEFAULT_REGION}") 
                     //docker.withRegistry("${REPOSITORY_URI}", eu-north-1) 
                     sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
-                    {
+                    //{
                         //docker.image("${IMAGE_REPO_NAME}:${IMAGE_TAG}").push()
                         sh "docker push ${REPOSITORY_URI}:${IMAGE_TAG}"
 
-                    }
+                    //}
                 }
             }
         }
