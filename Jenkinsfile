@@ -41,7 +41,10 @@ pipeline {
             steps {
                 script {
                     // Tag the Docker image
-                    docker.image("${IMAGE_REPO_NAME}:${IMAGE_TAG}").tag("${REPOSITORY_URI}:${IMAGE_TAG}")
+                    //docker.image("${IMAGE_REPO_NAME}:${IMAGE_TAG}").tag("${REPOSITORY_URI}:${IMAGE_TAG}")
+                    sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:${IMAGE_TAG}"
+                    
+
 
                     // Push the Docker image to AWS ECR
                     docker.withRegistry("${REPOSITORY_URI}", "${AWS_DEFAULT_REGION}") {
