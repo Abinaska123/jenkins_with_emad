@@ -48,11 +48,11 @@ pipeline {
 
                     // Push the Docker image to AWS ECR
                     //docker.withRegistry("${REPOSITORY_URI}", "${AWS_DEFAULT_REGION}") 
-                    docker.withRegistry("${REPOSITORY_URI}", eu-north-1) 
-                    {
-                        docker.image("${IMAGE_REPO_NAME}:${IMAGE_TAG}").push()
+                    //docker.withRegistry("${REPOSITORY_URI}", eu-north-1) 
+                    //{
+                        //docker.image("${IMAGE_REPO_NAME}:${IMAGE_TAG}").push()
 
-                    }
+                    //}
                 }
             }
         }
