@@ -28,23 +28,23 @@ WORKDIR /app
 COPY --chown=www-data:www-data . .
 
 # Create laravel caching folders.
-RUN mkdir -p /var/www/storage/framework
-RUN mkdir -p /var/www/storage/framework/cache
-RUN mkdir -p /var/www/storage/framework/testing
-RUN mkdir -p /var/www/storage/framework/sessions
-RUN mkdir -p /var/www/storage/framework/views
+RUN mkdir -p /app/storage/framework
+RUN mkdir -p /app/storage/framework/cache
+RUN mkdir -p /app/storage/framework/testing
+RUN mkdir -p /app/storage/framework/sessions
+RUN mkdir -p /app/storage/framework/views
 
 # Fix files ownership.
-RUN chown -R www-data /var/www/storage
-RUN chown -R www-data /var/www/storage/framework
-RUN chown -R www-data /var/www/storage/framework/sessions
+RUN chown -R www-data /app/storage
+RUN chown -R www-data /app/storage/framework
+RUN chown -R www-data /app/storage/framework/sessions
 
 # Set correct permission.
-RUN chmod -R 755 /var/www/storage
-RUN chmod -R 755 /var/www/storage/logs
-RUN chmod -R 755 /var/www/storage/framework
-RUN chmod -R 755 /var/www/storage/framework/sessions
-RUN chmod -R 755 /var/www/bootstrap
+RUN chmod -R 755 /app/storage
+RUN chmod -R 755 /app/storage/logs
+RUN chmod -R 755 /app/storage/framework
+RUN chmod -R 755 /app/storage/framework/sessions
+RUN chmod -R 755 /app/bootstrap
 
 # Adjust user permission & group
 RUN usermod --uid 1000 www-data
