@@ -31,6 +31,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
+                    cp env.prod .env
                     sh "docker build -t prod-laravel-api-base-image ."
                 }
             }
