@@ -8,7 +8,7 @@ ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
 ENV PHP_OPCACHE_REVALIDATE_FREQ=0
 
 # Install dependencies.
-RUN apt-get update && apt-get install -y unzip libpq-dev libcurl4-gnutls-dev nginx libonig-dev 
+RUN apt-get update && apt-get install -y unzip libpq-dev libcurl4-gnutls-dev nginx libonig-dev
 
 # Install PHP extensions.
 RUN docker-php-ext-install mysqli pdo pdo_mysql bcmath curl opcache mbstring
@@ -21,7 +21,7 @@ COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 COPY ./docker/php/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Set working directory to /var/www.
+# Set working directory to ...
 WORKDIR /app
 
 # Copy files from current folder to container current folder (set in workdir).
@@ -29,26 +29,13 @@ COPY --chown=www-data:www-data . .
 
 # Create laravel caching folders.
 RUN mkdir -p ./storage/framework
-RUN mkdir -p ./storage/framework/cache
-RUN mkdir -p ./storage/framework/testing
-RUN mkdir -p ./storage/framework/sessions
-RUN mkdir -p ./storage/framework/views
+RUN mkdir -p ./storage/framework/{cache, testing, sessions, views}
+RUN mkdir -p ./storage/framework/bootstrap
+RUN mkdir -p ./storage/framework/bootstrap/cache
 
-# Fix files ownership.
-RUN chown -R www-data ./storage
-RUN chown -R www-data ./storage/framework
-RUN chown -R www-data ./storage/framework/sessions
-
-# Set correct permission.
-RUN chmod -R 755 ./storage
-RUN chmod -R 755 ./storage/logs
-RUN chmod -R 755 ./storage/framework
-RUN chmod -R 755 ./storage/framework/sessions
-RUN chmod -R 755 ./bootstrap
-
-# Adjust user permission & group
+# Adjust user permission & group.
 RUN usermod --uid 1000 www-data
-RUN groupmod --gid 1001 www-data
+RUN groupmod --gid 1000  www-data
 
 # Run the entrypoint file.
 ENTRYPOINT [ "docker/entrypoint.sh" ]
